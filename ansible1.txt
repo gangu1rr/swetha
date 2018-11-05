@@ -1,0 +1,106 @@
+http://www.mydailytutorials.com/ansible-pip-module/ 
+
+( to study ansible playbooks)
+
+
+
+
+
+default directory : etc/ansible 
+
+Diff between ansible and chef:
+1. no workstation in ansible, you can directly work on the servers and install on nodes
+ANSIBLE IS AGENTLESS?
+know about virualisation nd then xplain docker
+container vs VMs?
+what is diff between roles and playbooks
+
+PIP MODULE :
+There are two prerequisites if you need to use all the features in this module.
+1 – The pip package should be installed on the remote server already. You can use the Ansible apt module or similar to install this as a part of a playbook if needed.
+2 – Virtualenv package should already be installed on the remote servers if you need to manage the packages in the Python virtual environment.
+
+
+what is VIRtualEnv?????????????/
+`suppose I am working on two different python projects. I have different pip modules needed for both projects> I cant really put all those pip modules in one system and work on my 
+applications. Insttead what I do is i create two seperate environments for two diff python projects and will sepearately store all the pip modules respectively over there. Anyways I have
+main python files at the global level
+
+
+setup command is used to gather all facts of remote servers
+
+
+PLUGINS:
+Action Plugins
+Cache Plugins
+Callback Plugins
+Connection Plugins
+Inventory Plugins
+Lookup Plugins
+Shell Plugins
+Strategy Plugins
+Vars Plugins
+Filters
+Tests
+Plugin Filter Configuration
+
+
+
+
+
+
+ansible.cfg (https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg)
+color
+path to hosts
+gathering:implicit ( facts frm remote )
+we can gather particular type of facts of remote machines like network ,hardware ,all , ohai ( to collect configuration data)
+stdout
+host_KEY_checking
+enabling callback plugin : mail
+ssh_timeout= 10
+path to vault password file
+settings path for all plugins
+
+
+
+
+
+creating EC2 instance:
+hosts- local host	
+1. name -creating securoty group 
+  ec2_group  : 
+				name: name of the ec2 group
+				region:
+				rules:
+				 protocol :tcp 
+				 from_port:22
+				 to port:22
+				 cidr_ip :0.0.0.0/0 ( this securty will allow traffic from all networks)
+				 
+	ec2:        key_name : (ssh key pair generated, writen a playbook where I had uploaded
+							the key pair to aws) 
+				region:
+				insance type:
+				AMI
+				count:
+				instance_tag
+				subnet_id
+				assign_public_ip
+				securit_group : (the one which you created above)
+				
+				
+				
+				
+Let us see how we generate a key pair for aws instances:
+tasks: 
+
+    name of the task : uploading my public key 
+	ec2_key:
+				name: (name of the public key )
+				region:
+				key material : (paste the rsa.pub)
+				state:present
+	
+	NOTE: we need boto when ever we write any amazon releated modules in our playbooks
+				
+	
